@@ -27,8 +27,8 @@ module.exports.getportfolio = async (req, res) => {
 }
 
 module.exports.allportfolio = async (req, res) => {
-    const portfolios = await Portfolio.find({})
-    return res.status(200).json({ portfolios })
+    const portfolio = await Portfolio.find({ url: req.body.url })
+    return res.status(200).json({ portfolio })
 }
 
 module.exports.updateurl = async (req, res) => {
