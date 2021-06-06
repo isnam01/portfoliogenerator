@@ -47,7 +47,8 @@ module.exports.getportfolio = async (req, res) => {
 }
 
 module.exports.allportfolio = async (req, res) => {
-    const portfolio = await Portfolio.findOne({ url: req.body.url }).select('-userid').select('-_id')
+    const url = req.params.url
+    const portfolio = await Portfolio.findOne({ url: url }).select('-userid').select('-_id')
     if (!portfolio) {
         return res.status(404).json({ message: "This is not a valid url" })
     }

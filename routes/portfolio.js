@@ -8,7 +8,7 @@ router.route('/portfolio')
     .get(authenticateLogin, portfolio.getportfolio)
 
 
-router.route('/allportfolio')
+router.route('/portfolio/:url')
     .get(portfolio.allportfolio)
 
 router.route('/updateurl')
