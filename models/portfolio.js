@@ -9,27 +9,27 @@ const PortfolioSchema = new Schema({
         ref: 'User'
     },
     sections: {
-        about: {
+        About: {
             type: Boolean,
             default: false
         },
-        skills: {
+        Skills: {
             type: Boolean,
             default: false
         },
-        resume: {
+        Resume: {
             type: Boolean,
             default: false
         },
-        projects: {
+        Projects: {
             type: Boolean,
             default: false
         },
-        services: {
+        Services: {
             type: Boolean,
             default: false
         },
-        contact: {
+        Contact: {
             type: Boolean,
             default: false
         }
@@ -39,7 +39,7 @@ const PortfolioSchema = new Schema({
         type: String,
         default: ""
     },
-    about: {
+    About: {
         profile: {
             type: String,
             default: ""
@@ -73,7 +73,7 @@ const PortfolioSchema = new Schema({
             default: ""
         }
     },
-    skills: [{
+    Skills: [{
         skillname: {
             type: String,
             default: ""
@@ -83,7 +83,7 @@ const PortfolioSchema = new Schema({
             default: ""
         }
     }],
-    resume: {
+    Resume: {
         education: [{
             courseName: {
                 type: String,
@@ -130,7 +130,7 @@ const PortfolioSchema = new Schema({
         }],
 
     },
-    projects: [{
+    Projects: [{
         title: {
             type: String,
             default: ""
@@ -144,7 +144,7 @@ const PortfolioSchema = new Schema({
             default: ""
         }
     }],
-    services: [{
+    Services: [{
         title: {
             type: String,
             default: ""
@@ -154,7 +154,7 @@ const PortfolioSchema = new Schema({
             default: ""
         }
     }],
-    contact: {
+    Contact: {
         email: {
             type: String,
             default: ""
@@ -190,6 +190,6 @@ const PortfolioSchema = new Schema({
             }
         }
     }
-})
+}, { versionKey: false })
 
 module.exports = mongoose.model('Portfolio', PortfolioSchema);
