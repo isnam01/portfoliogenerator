@@ -11,7 +11,8 @@ module.exports.editportfolio = async (req, res) => {
             Projects: req.body.Projects,
             Resume: req.body.Resume,
             Skills: req.body.Skills,
-            Contact: req.body.Contact
+            Contact: req.body.Contact,
+            url: req.body.url
         }
     })
         .then((portfolio) => {
@@ -46,13 +47,19 @@ module.exports.getportfolio = async (req, res) => {
 }
 
 module.exports.allportfolio = async (req, res) => {
-    const portfolio = await Portfolio.find({ url: req.body.url })
+    const portfolio = await Portfolio.findOne({ url: req.body.url }).select('-userid').select('-_id')
+    if (!portfolio) {
+        return res.status(404).json({ message: "This is not a valid url" })
+    }
     return res.status(200).json(portfolio)
 }
 
 module.exports.updateurl = async (req, res) => {
     const urls = await Portfolio.find({}, { url: 1, _id: 0 })
-    if (urls.includes(req.body.url)) {
+    const arrurl = urls.map((item) => {
+        return item.url
+    })
+    if (arrurl.includes(req.body.url)) {
         return res.status(422).json({ message: "This url is already taken" })
     }
     else {

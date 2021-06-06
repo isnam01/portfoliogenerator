@@ -74,7 +74,7 @@ const PortfolioSchema = new Schema({
         }
     },
     Skills: [{
-        skillname: {
+        skillName: {
             type: String,
             default: ""
         },
