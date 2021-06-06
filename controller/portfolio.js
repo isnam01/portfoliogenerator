@@ -8,6 +8,9 @@ module.exports.editportfolio = async (req, res) => {
         return res.status(500).json({ message: "Cant find portfolio" })
     }
     portfolio.sections = req.body.sections
+    portfolio.about = req.body.about
+    portfolio.services = req.body.services
+    portfolio.projects = req.body.projects
     portfolio.resume = req.body.resume
     portfolio.skills = req.body.skills
     portfolio.contact = req.body.contact
