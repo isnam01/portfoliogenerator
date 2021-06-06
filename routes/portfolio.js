@@ -9,7 +9,7 @@ router.route('/portfolio')
 
 
 router.route('/allportfolio')
-    .get(authenticateLogin, portfolio.allportfolio)
+    .get(portfolio.allportfolio)
 
 router.route('/updateurl')
     .post(authenticateLogin, portfolio.updateurl)

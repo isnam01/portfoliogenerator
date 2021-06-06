@@ -88,7 +88,9 @@ module.exports.postlogin = async (req, res) => {
 
                     }
                     const token = jwt.sign({ id: savedUser._id }, JWT_SECRET)
-                    return res.status(200).json({ token, user: savedUser._id, message: "Loggen In Succesfully" })
+                    const firstname = savedUser.firstname
+                    const lastname = savedUser.lastname
+                    return res.status(200).json({ token, firstname, lastname, message: "Loggen In Succesfully" })
 
                 })
 

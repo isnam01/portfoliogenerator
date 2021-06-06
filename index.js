@@ -3,7 +3,6 @@ const app = express()
 const mongoose = require('mongoose')
 const { mongourl, JWT_SECRET } = require('./config')
 const authRoutes = require('./routes/auth');
-const { authenticateLogin } = require('./middleware/authenticateLogin');
 const portfolioRoutes = require('./routes/portfolio')
 
 mongoose.connect(mongourl, {
@@ -18,6 +17,11 @@ db.on("open", () => {
     console.log("Database Connected")
 });
 
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 app.use(express.json());
 
 app.use('/', authRoutes);

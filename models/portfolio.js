@@ -36,57 +36,158 @@ const PortfolioSchema = new Schema({
     },
 
     url: {
-        type: String
+        type: String,
+        default: ""
     },
     about: {
-        profile: String,
-        dob: Date,
-        city: String,
-        phone: Number,
-        email: String,
-        degree: String,
-        freelance: String,
-        aboutSummary: String
+        profile: {
+            type: String,
+            default: ""
+        },
+        dob: {
+            type: String,
+            default: ""
+        },
+        city: {
+            type: String,
+            default: ""
+        },
+        phone: {
+            type: String,
+            default: ""
+        },
+        email: {
+            type: String,
+            default: ""
+        },
+        degree: {
+            type: String,
+            default: ""
+        },
+        freelance: {
+            type: String,
+            default: ""
+        },
+        aboutSummary: {
+            type: String,
+            default: ""
+        }
     },
     skills: [{
-        skillname: String,
-        skillExpertise: Number
+        skillname: {
+            type: String,
+            default: ""
+        },
+        skillExpertise: {
+            type: String,
+            default: ""
+        }
     }],
     resume: {
         education: [{
-            courseName: String,
-            courseStart: String,
-            courseEnd: String,
-            institute: String,
-            detail: String
+            courseName: {
+                type: String,
+                default: ""
+            },
+            courseStart: {
+                type: String,
+                default: ""
+            },
+            courseEnd: {
+                type: String,
+                default: ""
+            },
+            institute: {
+                type: String,
+                default: ""
+            },
+            detail: {
+                type: String,
+                default: ""
+            }
         }],
         experience: [{
-            profile: String,
-            start: Date,
-            end: Date,
-            organisation: String,
-            detail: String
+            profile: {
+                type: String,
+                default: ""
+            },
+            start: {
+                type: String,
+                default: ""
+            },
+            end: {
+                type: String,
+                default: ""
+            },
+            organisation: {
+                type: String,
+                default: ""
+            },
+            detail: {
+                type: String,
+                default: ""
+            }
         }],
-        projects: [{
-            title: String,
-            description: String,
-            link: String
-        }],
-        services: [{
-            title: String,
-            description: String
-        }]
+
     },
+    projects: [{
+        title: {
+            type: String,
+            default: ""
+        },
+        description: {
+            type: String,
+            default: ""
+        },
+        link: {
+            type: String,
+            default: ""
+        }
+    }],
+    services: [{
+        title: {
+            type: String,
+            default: ""
+        },
+        description: {
+            type: String,
+            default: ""
+        }
+    }],
     contact: {
-        email: String,
-        phone: Number,
-        location: String,
+        email: {
+            type: String,
+            default: ""
+        },
+        phone: {
+            type: String,
+            default: ""
+        },
+        location: {
+            type: String,
+            default: ""
+        },
         socialMedia: {
-            twitter: String,
-            facebook: String,
-            instagram: String,
-            github: String,
-            linkedin: String
+            twitter: {
+                type: String,
+                default: ""
+            },
+            facebook: {
+                type: String,
+                default: ""
+            },
+            instagram: {
+                type: String,
+                default: ""
+            },
+            github: {
+                type: String,
+                default: ""
+            },
+            linkedin: {
+                type: String,
+                default: ""
+            }
         }
     }
 })
