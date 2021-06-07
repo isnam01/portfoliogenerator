@@ -13,5 +13,6 @@ router.route('/portfolio/:url')
 
 router.route('/updateurl')
     .post(authenticateLogin, portfolio.updateurl)
+    .get(authenticateLogin, portfolio.geturl)
 
 module.exports = router;

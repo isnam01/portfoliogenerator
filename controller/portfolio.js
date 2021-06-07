@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const Portfolio = require('../models/portfolio');
+const user = require('../models/user');
 
 module.exports.editportfolio = async (req, res) => {
     var id = req.user
@@ -12,7 +13,6 @@ module.exports.editportfolio = async (req, res) => {
             Resume: req.body.Resume,
             Skills: req.body.Skills,
             Contact: req.body.Contact,
-            url: req.body.url
         }
     })
         .then((portfolio) => {
@@ -48,11 +48,15 @@ module.exports.getportfolio = async (req, res) => {
 
 module.exports.allportfolio = async (req, res) => {
     const url = req.params.url
-    const portfolio = await Portfolio.findOne({ url: url }).select('-userid').select('-_id')
-    if (!portfolio) {
+    const pf = await Portfolio.findOne({ url: url }).select('-_id')
+    if (!pf) {
         return res.status(404).json({ message: "This is not a valid url" })
     }
-    return res.status(200).json(portfolio)
+    const userid = pf.userid
+    const user = await User.findOne({ _id: userid }).select('firstname').select('lastname').select('-_id')
+    var portfolio = JSON.parse(JSON.stringify(pf));
+    delete portfolio.userid
+    return res.status(200).json({ portfolio, user })
 }
 
 module.exports.updateurl = async (req, res) => {
@@ -64,6 +68,13 @@ module.exports.updateurl = async (req, res) => {
         return res.status(422).json({ message: "This url is already taken" })
     }
     else {
+        await Portfolio.findOneAndUpdate({ userid: req.user }, { $set: { url: req.body.url } })
+
         return res.status(200).json({ message: "Updated your url" })
     }
+}
+
+module.exports.geturl = async (req, res) => {
+    const url = await Portfolio.findOne({ userid: req.user }).select('url').select('-_id')
+    return res.status(200).json(url)
 }
