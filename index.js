@@ -1,10 +1,11 @@
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
-const { mongourl, JWT_SECRET } = require('./config')
+const { mongourl } = require('./config')
 const authRoutes = require('./routes/auth');
 const portfolioRoutes = require('./routes/portfolio')
 const userRoutes = require('./routes/user')
+const PORT = process.env.PORT || 3000;
 
 mongoose.connect(mongourl, {
     useNewUrlParser: true,
@@ -30,6 +31,6 @@ app.use('/', authRoutes);
 app.use('/', portfolioRoutes);
 app.use('/', userRoutes);
 
-app.listen(3000, () =>
-    console.log("Serving on port 3000")
+app.listen(PORT, () =>
+    console.log(`Serving on port ${PORT}`)
 )
