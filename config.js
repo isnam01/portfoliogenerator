@@ -1,9 +1,8 @@
 if (process.env.NODE_ENV === "production") {
-    module.exports = {
-        MONGOURI: process.env.MONGOURI,
-        JWT_SECRET: process.env.JWT_SECRET,
-        SEND_API: process.env.SEND_API
-    }
+    module.exports.mongourl = process.env.mongourl,
+        module.exports.JWT_SECRET = process.env.JWT_SECRET,
+        module.exports.password = process.env.password
+
 }
 else {
 
