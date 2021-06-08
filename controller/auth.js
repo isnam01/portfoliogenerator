@@ -87,10 +87,18 @@ module.exports.postlogin = async (req, res) => {
                         return res.status(400).json({ error: "Invalid email or passowrd" })
 
                     }
-                    const token = jwt.sign({ id: savedUser._id }, JWT_SECRET)
-                    const firstname = savedUser.firstname
-                    const lastname = savedUser.lastname
-                    return res.status(200).json({ token, firstname, lastname, message: "Loggen In Succesfully" })
+
+                    Portfolio.findOne({ userid: savedUser._id }).select('url').select('-_id')
+                        .then((data) => {
+                            const token = jwt.sign({ id: savedUser._id }, JWT_SECRET)
+                            const firstname = savedUser.firstname
+                            const lastname = savedUser.lastname
+                            const url = data.url
+                            return res.status(200).json({ token, firstname, lastname, url, message: "Loggen In Succesfully" })
+
+                        }).catch((err) => {
+                            console.log(err)
+                        })
 
                 })
 

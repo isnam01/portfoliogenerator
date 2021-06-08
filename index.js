@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const { mongourl, JWT_SECRET } = require('./config')
 const authRoutes = require('./routes/auth');
 const portfolioRoutes = require('./routes/portfolio')
+const userRoutes = require('./routes/user')
 
 mongoose.connect(mongourl, {
     useNewUrlParser: true,
@@ -27,6 +28,7 @@ app.use(express.json());
 
 app.use('/', authRoutes);
 app.use('/', portfolioRoutes);
+app.use('/', userRoutes);
 
 app.listen(3000, () =>
     console.log("Serving on port 3000")

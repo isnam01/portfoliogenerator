@@ -7,7 +7,7 @@ module.exports.authenticateLogin = (req, res, next) => {
         return res.status(401).json({ message: "You are unauthorized" })
     }
     const token = authHeader && authHeader.split(' ')[1]
-    if (token == null) return res.status(401)
+    if (token == null) return res.status(401).json({ message: "You are unauthorized" })
 
     jwt.verify(token, JWT_SECRET, (err, user) => {
         if (err)

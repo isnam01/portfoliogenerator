@@ -1,6 +1,5 @@
 const User = require('../models/user');
 const Portfolio = require('../models/portfolio');
-const user = require('../models/user');
 
 module.exports.editportfolio = async (req, res) => {
     var id = req.user
@@ -77,4 +76,21 @@ module.exports.updateurl = async (req, res) => {
 module.exports.geturl = async (req, res) => {
     const url = await Portfolio.findOne({ userid: req.user }).select('url').select('-_id')
     return res.status(200).json(url)
+}
+
+module.exports.contact = async (req, res) => {
+    const url = req.params.url
+    const ct = await Portfolio.findOne({ url: url }).select('-_id').select('Contact').select('userid').select('About')
+    const profile = ct.About.profile
+    if (!ct) {
+        return res.status(404).json({ message: "This is not a valid url" })
+    }
+    const userid = ct.userid
+    const user1 = await User.findOne({ _id: userid }).select('firstname').select('lastname').select('-_id')
+    var cp = JSON.parse(JSON.stringify(ct));
+    delete cp.userid
+    const contact = cp.Contact
+    let user = JSON.parse(JSON.stringify(user1))
+    user.profile = profile
+    return res.status(200).json({ contact, user })
 }

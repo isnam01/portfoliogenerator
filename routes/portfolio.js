@@ -15,4 +15,7 @@ router.route('/updateurl')
     .post(authenticateLogin, portfolio.updateurl)
     .get(authenticateLogin, portfolio.geturl)
 
+router.route('/contact/:url')
+    .get(portfolio.contact)
+
 module.exports = router;
